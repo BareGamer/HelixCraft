@@ -31,9 +31,10 @@ begin
 end;
 
 begin
-  ondrawframe:=measurefps;
-  var second:timer:=new timer(1000,everysecond);
-  second.Start;
+//  ondrawframe:=measurefps;
+//  var second:timer:=new timer(1000,everysecond);
+//  second.Start;
+  
   //graph3d.hvp.ShowFrameRate:=true;
   //graph3d.hvp.ShowTriangleCountInfo:=true;
   if not wine then
@@ -51,57 +52,76 @@ begin
 
 //  graph3d.HideObjects;
 
-  var height:integer=315;
-  milliseconds;
-  {$omp parallel for}
-  for var i:integer:=0 to 15 do
-  begin
-    for var j:integer:=0 to 15 do
-    begin
-      for var k:integer:=0 to height do
-      begin
-        new monotone_cube(i*blocksize, j*blocksize, k*blocksize, 0);
-      end;
-    end;
-  end;
-
-//  var cubes:array[0..15,0..15,0..63] of cube;
+//small chunk test
+//  var height:integer=16{384};
 //  milliseconds;
+//  {$omp parallel for}
 //  for var i:integer:=0 to 15 do
 //  begin
 //    for var j:integer:=0 to 15 do
 //    begin
 //      for var k:integer:=0 to height do
 //      begin
+//        new monotone_cube(i*blocksize, j*blocksize, k*blocksize, 0);
+//      end;
+//    end;
+//  end;
+//  //window.Caption:=millisecondsdelta.ToString;
+//  writeln(millisecondsdelta);
+
+//big chunk test
+//  var cubes:array[0..chunksize-1,0..chunksize-1,0..316{chunksize-1}] of cube;
+//  //var cubes:array[0..chunksize_cube_minus_1] of cube;
+//  for var i:integer:=0 to 15 do
+//  begin
+//    for var j:integer:=0 to 15 do
+//    begin
+//      for var k:integer:=0 to 316 do
+//      begin
 //        cubes[i][j][k]:=new cube(i*blocksize,j*blocksize,k*blocksize,0);
+//        //cubes[i+j*chunksize+k*chunksize_square]:=new cube(i*blocksize,j*blocksize,k*blocksize,0);
 //        //graph3d.Cube(i*blocksize,j*blocksize,k*blocksize,1,imagematerial(matsfolder+'0.png',1,1));
 //        //count+=1;
 //        //window.Caption:=count +' done out of '+ (316*256)
 //      end;
 //    end;
-//    for var l:integer:=0 to height do
+//    for var l:integer:=0 to 316 do
 //    begin
 //      var temp:blocks;
 //      for var m:integer:=0 to 15 do
 //      begin
-//        temp[m]:=cubes[i][m][l]  
+//        temp[m]:=cubes[i][m][l];
+//        //temp[m]:=cubes[i+m*chunksize+l*chunksize_square];
 //      end;
 //      optimise(temp);
-//      cubet.Load('greedytest');
-//      system.GC.Collect(5,System.GCCollectionMode.Optimized,false,true);
-//      if l mod 15=0 then 
-//        begin
-//          //milliseconds;
-//          //system.GC.Collect(5,System.GCCollectionMode.Forced,false,true);
-//          //writeln(millisecondsdelta+' for GC');
-//          sleep(1000);
-//        end;
+//      //cubet.Load('greedytest');
 //    end;
 //  end;
-  
-  writeln(millisecondsdelta);
+//  window.Caption:=millisecondsdelta.ToString;
+//  writeln(millisecondsdelta);
 //  graph3d.ShowObjects;
 //  writeln(millisecondsdelta);
+
+//test optimisation
+  var cubes:blocks;
+  for var i:integer:=0 to chunksize_minus_1 do
+  begin
+    cubes[i]:=new cube(0,i*blocksize,0,0);    
+  end;
+  
+  optimise(cubes);
+
+//graph3d.Cube(0,0,0,2);
+
+//var cv3d:=helixtoolkit.Wpf.CubeVisual3D.Create();
+//var obj:=objectwithmaterial3d.Create();
+//var model:=new system.Windows.Media.Media3D.GeometryModel3D();
+
+{TODO
+var model:=new system.Windows.Media.Media3D.MeshGeometry3d();
+writeln(model.TextureCoordinates.Count);
+var test:=new system.windows.media.media3d.Point3DCollection;
+}
 
 //  var t:object3d{:=graph3d.cube(0,0,0,2)};
 //  var t:=graph3d.DeserializeObject3D('serialization');

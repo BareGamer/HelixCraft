@@ -6,9 +6,12 @@ blocksize=1;
 chunksize=16;
 chunksize_minus_1=chunksize-1;
 chunksize_square=chunksize*chunksize;
+chunksize_square_minus_1=chunksize_square-1;
 chunksize_cube=chunksize_square*chunksize;
+chunksize_cube_minus_1=chunksize_cube-1;
 
 //type non_monotone_blocks=(grass,trunk);
+//helixtoolkit.wpf.noise2d | mousegesturehandler
 
 var mats:array[0..15] of System.Windows.Media.Media3D.Material;
 var monotonecubes:array[0..15] of cubet;

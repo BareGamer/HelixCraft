@@ -3,7 +3,4 @@ Generally, this game should work on wine if you've got reasonably modern version
 as of now, the 9.10-staging release works for me). It is recommended to use the latest dxvk 1(1.10) or later, as dxvk 1.10 definitely 
 contains fixes for WPF rendering. WineD3D does not work and it is unclear if it ever will.
 Also, I think it makes sense, but you need to have .net 4.8 installed (possibly through winetricks).
-So, what's the problem? The game uses getcurrentdir to make sure models can load even if you change your folder, but for some weird
-reason, it (currently) returns the directory where your wineprefix is located on wine. To work around this issue, you should create
-a file called "gamepath.txt" in this directory and insert the path to the game's exe (without the game's name itself). 
 Then the game should work. Have fun :)

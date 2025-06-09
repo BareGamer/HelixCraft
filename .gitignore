@@ -1,3 +1,8 @@
 *.pcu
 *.pdb
 *.opt
+*.obj
+*.mtl
+*.blend*
+*.exe
+*.jpg

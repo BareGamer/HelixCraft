@@ -12,7 +12,6 @@ procedure directorychecks();
 begin
   var t:text;
   var directory:=GetCurrentDir();
-  writeln(directory);
   if directory.contains('Z:')then
   begin
     {if not fileexists(directory+'gamepath.txt') then
@@ -23,16 +22,14 @@ begin
     end else
     begin}
       wine:=true;
-      var l:text;
+      {var l:text;
       l:=OpenRead('gamepath.txt',system.text.encoding.utf8);
       var dir:=l.ReadlnString();
       chdir(dir);
       l.Close;
       matsfolder:=dir+'\tex\';
-    {end;}
+    end;}
   end;
-  if not wine then
-  begin
   if not(fileexists('directory.txt')) then
   begin
     t:=OpenWrite('directory.txt',system.text.encoding.utf8);
@@ -51,18 +48,14 @@ begin
       t.Close;
     end;
   end;
-  end;
 end;
 
 procedure setmatsfolder();
 begin
-  if not wine then
-  begin
   var t:text;
   t:=OpenRead('directory.txt',system.text.encoding.utf8);
   matsfolder:=t.ReadlnString+'\tex\';
   t.Close;
-  end;
 end;
 
 begin
